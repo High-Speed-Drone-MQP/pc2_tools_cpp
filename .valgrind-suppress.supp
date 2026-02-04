@@ -1,0 +1,28 @@
+{
+   # Suppress known false positives from ROS 2
+   ros2_init_leak
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:*rcl*
+   fun:*rclcpp*
+}
+
+{
+   # Suppress CUDA context initialization (not a leak)
+   cuda_context_init
+   Memcheck:Leak
+   ...
+   fun:*cuda*
+}
+
+{
+   # Suppress TF2 buffer allocations (managed by ROS 2)
+   tf2_buffer
+   Memcheck:Leak
+   ...
+   fun:*tf2*
+}
+
+
+
